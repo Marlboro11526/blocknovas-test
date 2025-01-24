@@ -48,13 +48,13 @@ const fetchExchangeRates = async (baseCurrency) => {
     }
 }
 
-exports.convert = async (amount, fromCurrency, toCurrency) => {
-    const rates = await fetchExchangeRates(fromCurrency);
+exports.convert = async (amount, baseCurrency, targetCurrency) => {
+    const rates = await fetchExchangeRates(baseCurrency);
 
-    if (!rates[toCurrency]) {
-        throw new Error(`Currency ${toCurrency} not found`);
+    if (!rates[targetCurrency]) {
+        throw new Error(`Currency ${targetCurrency} not found`);
     }
 
-    const convertedAmount = amount * rates[toCurrency];
+    const convertedAmount = amount * rates[targetCurrency];
     return convertedAmount;
 }
